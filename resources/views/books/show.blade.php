@@ -17,7 +17,7 @@
                                 <p class="lead mb-0 opacity-75">por {{ $book->author }}</p>
                             </div>
                             <div class="d-flex gap-2">
-                                <a href="book-create.html" class="btn btn-light">Editar</a>
+                                <a href="{{ route('books.edit', $book) }}" class="btn btn-light">Editar</a>
                                 <button class="btn btn-danger">Excluir</button>
                             </div>
                         </div>

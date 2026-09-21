@@ -7,7 +7,7 @@
                 <h1 class="mb-1">Coleção de Livros</h1>
                 <p class="text-muted mb-0">Gerencie sua biblioteca de livros</p>
             </div>
-            <a href="book-create.html" class="btn btn-primary btn-lg">
+            <a href="{{ route('books.create') }}" class="btn btn-primary btn-lg">
                 + Adicionar Novo Livro
             </a>
         </div>
@@ -36,7 +36,7 @@
                             <td class="text-muted">{{ $book->year_release }}</td>
                             <td>
                                 <a href="{{ route('books.show', $book) }}" class="btn btn-sm btn-outline-primary me-1">Ver</a>
-                                <a href="book-create.html" class="btn btn-sm btn-outline-success me-1">Editar</a>
+                                <a href="{{ route('books.edit', $book) }}" class="btn btn-sm btn-outline-success me-1">Editar</a>
                                 <button class="btn btn-sm btn-outline-danger">Excluir</button>
                             </td>
                         </tr>

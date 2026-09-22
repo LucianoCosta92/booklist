@@ -7,3 +7,6 @@ Dashboard de Livros - Laravel 13
 ## Lista de Livros
 ![alt text](2026-09-21_19-58_1.png)
 
+## Detalhes do Livro
+![alt text](2026-09-21_19-59.png)
+

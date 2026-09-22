@@ -9,8 +9,8 @@ class DashboardController extends Controller
 {
     public function index(){
         $books = Book::select([
-            'id', 'title', 'author', 'published_year', 'created_at'
-        ])->orderBy('created_at', 'desc')->get();
+            'id', 'title', 'author', 'published_year'
+        ])->latest()->take(3)->get();
 
         return view('welcome', compact('books'));
     }

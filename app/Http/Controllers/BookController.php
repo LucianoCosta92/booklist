@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     public function index(){
-        $books = Book::select([
-            'id', 'title', 'author', 'genre', 'resume', 'published_year', 'created_at'
-        ])->orderBy('created_at', 'desc')->get();
+
+        $books = Book::with('genre')->select([
+            'id', 'title', 'author', 'genre_id', 'resume', 'published_year', 'created_at'
+        ])->orderBy('created_at', 'desc')->paginate(5);
 
         return view('books.index', compact('books'));
     }
 
     public function show(Book $book){
+        $book->load('genre');
         return view('books.show', compact('book'));
     }
 
@@ -36,6 +38,6 @@ class BookController extends Controller
     }
 
     public function destroy(){
-        
+
     }
 }

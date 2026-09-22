@@ -32,7 +32,7 @@
                                 <div class="fw-medium">{{ $book->title }}</div>
                             </td>
                             <td>{{ $book->author }}</td>
-                            <td><span class="badge bg-primary bg-opacity-10 text-primary">{{ $book->genre }}</span></td>
+                            <td><span class="badge bg-primary bg-opacity-10 text-primary">{{ $book->genre->name }}</span></td>
                             <td class="text-muted">{{ $book->year_release }}</td>
                             <td>
                                 <a href="{{ route('books.show', $book) }}" class="btn btn-sm btn-outline-primary me-1">Ver</a>
@@ -46,18 +46,12 @@
             </div>
 
             <!-- Paginação -->
-            <div class="card-footer d-flex justify-content-between align-items-center bg-light">
-                <span class="text-muted">Mostrando 1 a 5 de 24 resultados</span>
-                <nav>
-                    <ul class="pagination pagination-sm mb-0">
-                        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
-                    </ul>
-                </nav>
-            </div>
+            @if ($books->hasPages())
+                <div class="card-footer d-flex justify-content-between align-items-center bg-light">
+                    {{ $books->links() }}
+                </div>
+            @endif
+
         </div>
     </div>
 </x-layout>

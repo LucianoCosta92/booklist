@@ -40,7 +40,7 @@
                                 <table class="table table-sm table-borderless">
                                     <tr>
                                         <td class="text-muted fw-medium w-40 pe-3">Gênero:</td>
-                                        <td><span class="badge bg-primary bg-opacity-10 text-primary">{{ $book->genre }}</span></td>
+                                        <td><span class="badge bg-primary bg-opacity-10 text-primary">{{ $book->genre->name }}</span></td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted fw-medium pe-3">Ano de publicação:</td>

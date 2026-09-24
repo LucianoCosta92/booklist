@@ -29,7 +29,7 @@
                             <!-- Coluna Esquerda - Capa -->
                             <div class="col-md-4">
                                 <div class="text-center">
-                                    <img src="https://placehold.co/300x450/6c757d/ffffff?text=Capa+do+Livro" alt="Capa do Livro" class="img-fluid rounded shadow-sm mb-3" style="max-height: 400px;">
+                                    <img src="{{ Storage::url($book->cover) }}" alt="Capa do Livro" class="img-fluid rounded shadow-sm mb-3" style="max-height: 400px;">
                                 </div>
                             </div>
 

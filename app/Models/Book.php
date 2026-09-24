@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['title', 'author', 'genre', 'resume', 'published_year'])]
+#[Fillable(['title', 'author', 'genre_id', 'cover', 'resume', 'published_year'])]
 class Book extends Model
 {
     public function genre(){

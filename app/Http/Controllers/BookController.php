@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -22,11 +23,27 @@ class BookController extends Controller
     }
 
     public function create(){
-        return view('books.create');
+        $genres = Genre::all();
+        return view('books.create', compact('genres'));
     }
 
-    public function store(){
+    public function store(Request $request){
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'genre_id' => 'required|exists:genres,id',
+            'cover' => 'nullable|image|mimes:png,jpg,jpeg',
+            'published_year' => 'required|integer',
+            'resume' => 'nullable|string',
+        ]);
 
+        if($request->hasFile('cover') && $request->file('cover')->isValid()){
+            $validated['cover'] = $request->file('cover')->store();
+        }
+
+        Book::create($validated);
+
+        return redirect()->route('books.index');
     }
 
     public function edit(Book $book){

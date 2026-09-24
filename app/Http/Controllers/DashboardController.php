@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index(){
         $books = Book::select([
-            'id', 'title', 'author', 'published_year'
+            'id', 'title', 'author', 'cover', 'published_year'
         ])->latest()->take(3)->get();
 
         return view('welcome', compact('books'));

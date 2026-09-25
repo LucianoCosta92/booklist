@@ -18,7 +18,11 @@
                             </div>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('books.edit', $book) }}" class="btn btn-light">Editar</a>
-                                <button class="btn btn-danger">Excluir</button>
+                                <form action="{{ route('books.destroy', $book) }}" method="POST" onsubmit="return confirm('Excluir este livro?')" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" >Excluir</button>
+                                </form>
                             </div>
                         </div>
                     </div>

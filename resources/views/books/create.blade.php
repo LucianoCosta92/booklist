@@ -79,7 +79,9 @@
                             <!-- Descrição -->
                             <div class="mb-3">
                                 <label for="resume" class="form-label">Descrição</label>
-                                <textarea class="form-control" id="resume" name="resume" rows="5" placeholder="Digite a descrição do livro..."  value="{{ old('resume') }}"></textarea>
+                                <textarea class="form-control" id="resume" name="resume" rows="5" placeholder="Digite a descrição do livro..." >
+                                    {{ old('resume') }}
+                                </textarea>
                             </div>
 
                             <!-- Botões -->

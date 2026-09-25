@@ -37,7 +37,11 @@
                             <td>
                                 <a href="{{ route('books.show', $book) }}" class="btn btn-sm btn-outline-primary me-1">Ver</a>
                                 <a href="{{ route('books.edit', $book) }}" class="btn btn-sm btn-outline-success me-1">Editar</a>
-                                <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                                <form action="{{ route('books.destroy', $book) }}" method="POST" onsubmit="return confirm('Excluir este livro?')" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" >Excluir</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

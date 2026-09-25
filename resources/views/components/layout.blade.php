@@ -27,6 +27,15 @@
         </div>
     </nav>
 
+    @if (session('success'))
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+        </div>
+    </div>
+    @endif
+
+
     {{ $slot }}
 
 </body>

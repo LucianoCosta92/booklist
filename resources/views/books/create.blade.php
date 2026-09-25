@@ -29,7 +29,7 @@
                             <!-- Autor -->
                             <div class="mb-3">
                                 <label for="author" class="form-label">Autor <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="author" name="author" placeholder="Digite o nome do autor" value="{{ old('author') }}" >
+                                <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" placeholder="Digite o nome do autor" value="{{ old('author') }}" >
                                 <div class="invalid-feedback">
                                     @error('author')
                                         {{ $message }}
@@ -40,7 +40,7 @@
                             <!-- Capa do Livro -->
                             <div class="mb-3">
                                 <label for="cover" class="form-label">Capa do Livro</label>
-                                <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover" name="cover" accept="image/*">
+                                <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover" name="cover" accept="image/png,image/jpeg,image/jpg">
                                 <div class="form-text">Imagem JPG, JPEG ou PNG (máx. 2MB)</div>
                                 @error('cover')
                                     <div class="invalid-feedback">
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="published_year" class="form-label">Ano de Publicação <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control @error('title') is-invalid @enderror" id="published_year" name="published_year" placeholder="2025" min="1000" max="2099"  value="{{ old('published_year') }}">
+                                    <input type="number" class="form-control @error('published_year') is-invalid @enderror" id="published_year" name="published_year" placeholder="2025" min="1000" max="2099"  value="{{ old('published_year') }}">
                                     <div class="invalid-feedback">
                                         @error('published_year')
                                             {{ $message }}
@@ -79,9 +79,12 @@
                             <!-- Descrição -->
                             <div class="mb-3">
                                 <label for="resume" class="form-label">Descrição</label>
-                                <textarea class="form-control" id="resume" name="resume" rows="5" placeholder="Digite a descrição do livro..." >
-                                    {{ old('resume') }}
-                                </textarea>
+                                <textarea class="form-control @error('resume') is-invalid @enderror" id="resume" name="resume" rows="5" placeholder="Digite a descrição do livro..." >{{ old('resume') }}</textarea>
+                                @error('resume')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <!-- Botões -->

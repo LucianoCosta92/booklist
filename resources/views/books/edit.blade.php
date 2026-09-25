@@ -6,7 +6,7 @@
                 <div class="mb-4">
                     <a href="{{ route('books.index') }}" class="text-decoration-none mb-2 d-inline-block">← Voltar para Livros</a>
                     <h1 class="mb-1">Editar Livro</h1>
-                    <p class="text-muted mb-0">Preencha os detalhes para editar um livro à sua coleção</p>
+                    <p class="text-muted mb-0">Preencha os detalhes para editar um livro</p>
                 </div>
 
                 <!-- Formulário -->
@@ -29,7 +29,7 @@
                             <!-- Autor -->
                             <div class="mb-3">
                                 <label for="author" class="form-label">Autor <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="author" name="author" placeholder="Digite o nome do autor" value="{{ old('author', $book->author) }}" >
+                                <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" placeholder="Digite o nome do autor" value="{{ old('author', $book->author) }}" >
                                 <div class="invalid-feedback">
                                     @error('author')
                                         {{ $message }}
@@ -40,10 +40,12 @@
                             <!-- Capa do Livro -->
                             <div class="mb-3">
                                 <label for="cover" class="form-label">Capa do Livro</label>
+                                @if ($book->cover)
                                 <div class="mb-2">
-                                    <img src="{{ Storage::url($book->cover) }}" style="max-height:150px">
+                                    <img src="{{ Storage::url($book->cover) }}" alt="Capa do livro" style="max-height:150px">
                                 </div>
-                                <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover" name="cover" accept="image/*">
+                                @endif
+                                <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover" name="cover" accept="image/png,image/jpeg,image/jpg">
                                 <div class="form-text">Imagem JPG, JPEG ou PNG (máx. 2MB)</div>
                                 @error('cover')
                                     <div class="invalid-feedback">
@@ -66,7 +68,7 @@
                                         @foreach ($genres as $genre)
                                             <option
                                                 value="{{ $genre->id }}"
-                                                @if ($book->genre_id == $genre->id) selected @endif
+                                                @selected(old('genre_id', $book->genre_id) == $genre->id)
                                             >
                                                 {{ $genre->name }}
                                             </option>
@@ -80,7 +82,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="published_year" class="form-label">Ano de Publicação <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control @error('title') is-invalid @enderror" id="published_year" name="published_year" placeholder="2025" min="1000" max="2099"  value="{{ old('published_year', $book->published_year) }}">
+                                    <input type="number" class="form-control @error('published_year') is-invalid @enderror" id="published_year" name="published_year" placeholder="2025" min="1000" max="2099"  value="{{ old('published_year', $book->published_year) }}">
                                     <div class="invalid-feedback">
                                         @error('published_year')
                                             {{ $message }}
@@ -92,9 +94,12 @@
                             <!-- Descrição -->
                             <div class="mb-3">
                                 <label for="resume" class="form-label">Descrição</label>
-                                <textarea class="form-control" id="resume" name="resume" rows="5" placeholder="Digite a descrição do livro...">
-                                    {{ old('resume', $book->resume) }}
-                                </textarea>
+                                <textarea class="form-control  @error('resume') is-invalid @enderror" id="resume" name="resume" rows="5" placeholder="Digite a descrição do livro...">{{ old('resume',$book->resume) }}</textarea>
+                                @error('resume')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <!-- Botões -->

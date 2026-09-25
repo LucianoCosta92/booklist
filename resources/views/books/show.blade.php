@@ -65,7 +65,6 @@
                         <!-- Botões de Ação -->
                         <div class="mt-4 pt-3 border-top d-flex gap-3">
                             <a href="{{ route('books.index') }}" class="btn btn-primary px-4">Voltar para a Lista</a>
-                            <a href="book-create.html" class="btn btn-success px-4">Editar Livro</a>
                         </div>
                     </div>
                 </div>

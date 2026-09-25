@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -28,21 +30,14 @@ class BookController extends Controller
         return view('books.create', compact('genres'));
     }
 
-    public function store(Request $request){
-        $validated = $request->validate([
-            'title' => 'required|string',
-            'author' => 'required|string',
-            'genre_id' => 'required|exists:genres,id',
-            'cover' => 'nullable|image|mimes:png,jpg,jpeg',
-            'published_year' => 'required|integer',
-            'resume' => 'nullable|string',
-        ]);
+    public function store(StoreBookRequest $request){
+        $data = $request->validated();
 
         if($request->hasFile('cover') && $request->file('cover')->isValid()){
-            $validated['cover'] = $request->file('cover')->store();
+            $data['cover'] = $request->file('cover')->store();
         }
 
-        Book::create($validated);
+        Book::create($data);
 
         return redirect()->route('books.index')->with('success', 'Livro adicionado com sucesso!');
     }
@@ -53,24 +48,17 @@ class BookController extends Controller
         return view('books.edit', compact('book', 'genres'));
     }
 
-    public function update(Request $request, Book $book){
-        $validated = $request->validate([
-            'title' => 'required|string',
-            'author' => 'required|string',
-            'genre_id' => 'required|exists:genres,id',
-            'cover' => 'nullable|image|mimes:png,jpg,jpeg',
-            'published_year' => 'required|integer',
-            'resume' => 'nullable|string',
-        ]);
+    public function update(UpdateBookRequest $request, Book $book){
+        $data = $request->validated();
 
         if($request->hasFile('cover') && $request->file('cover')->isValid()){
             if($book->cover && Storage::disk('public')->exists($book->cover)){
                 Storage::disk('public')->delete($book->cover);
             }
-            $validated['cover'] = $request->file('cover')->store();
+            $data['cover'] = $request->file('cover')->store();
         }
 
-        $book->update($validated);
+        $book->update($data);
 
         return redirect()->route('books.index')->with('success', 'Livro atualizado com sucesso!');
     }
